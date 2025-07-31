@@ -14,8 +14,7 @@ Built using **HTML**, **CSS**, and **JavaScript**, it stores data locally using 
 
 ## 🛠️ Tech Stack
 - HTML5  
-- CSS3  
-- JavaScript (Vanilla)  
+- CSS3
 - localStorage API
 
 ## 🌐 Live Demo
