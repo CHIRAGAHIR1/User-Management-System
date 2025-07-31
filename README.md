@@ -19,7 +19,8 @@ Built using **HTML**, **CSS**, and **JavaScript**, it stores data locally using 
 - localStorage API
 
 ## 🌐 Live Demo
-https://chiragahir1.github.io/User-Management-System/
+Try the live version here:
+🔗 [https://chiragahir1.github.io/User-Management-System/]
 
 ## 💡 How to Use
 1. Open the app in a browser  
