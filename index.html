@@ -1,0 +1,105 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>User Management</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="pwd" placeholder="Password"><br>
+        <right id="right-button">
+            <button  class="submit-btn" onclick="addUser()">Submit</button>
+        </right>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="search" onkeyup="updateTable()" placeholder="Search users...">
+        <button onclick="updateTable()">Search</button>
+        <select id="sortDropdown" onchange="sortUsers()">
+            <option value="name">Sort by Name</option>
+            <option value="username">Sort by Username</option>
+            <option value="password">Sort by Password</option>
+        </select>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+    </table>
+
+    <script>
+        let users = JSON.parse(localStorage.getItem("users")) || [], editIndex = null, sortField = "name", sortAsc = true;
+
+        function addUser() {
+            const name = document.getElementById("name").value.trim();
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("pwd").value.trim();
+            if (!name || !username || !password) return alert("Fill all fields!");
+
+            if (editIndex !== null) users[editIndex] = { name, username, password };
+            else {
+                users.push({ name, username, password });
+                localStorage.setItem("users", JSON.stringify(users));
+            }
+
+
+            editIndex = null;
+            document.querySelectorAll("input").forEach(input => input.value = "");
+            updateTable();
+        }
+        updateTable();
+
+        function updateTable() {
+            const query = document.getElementById("search").value.toLowerCase();
+            document.getElementById("tb").innerHTML = users
+                .filter(user => Object.values(user).some(val => val.toLowerCase().includes(query)))
+                .map((user, i) => `
+                    <tr>
+                        <td>${user.name}</td>
+                        <td>${user.username}</td>
+                        <td>${user.password}</td>
+                        <td>
+                            <button onclick="editUser(${i})">Edit</button>
+                            <button class="lal" onclick="deleteUser(${i})">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            localStorage.setItem("users", JSON.stringify(users));
+
+        }
+
+        function editUser(i) {
+            editIndex = i;
+            Object.keys(users[i]).forEach((key, idx) => document.querySelectorAll("input")[idx].value = users[i][key]);
+            localStorage.setItem("users", JSON.stringify(users));
+
+        }
+
+        function deleteUser(i) {
+            if (confirm("Delete this user?")) users.splice(i, 1), updateTable();
+            localStorage.setItem("users", JSON.stringify(users));
+
+        }
+
+        function sortUsers() {
+            sortField = document.getElementById("sortDropdown").value;
+            users.sort((a, b) => a[sortField].localeCompare(b[sortField]) * (sortAsc ? 1 : -1));
+            sortAsc = !sortAsc;
+            updateTable();
+        }
+    </script>
+</body>
+
+</html>
