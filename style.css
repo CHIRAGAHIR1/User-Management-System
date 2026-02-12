@@ -1,94 +1,191 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    text-align: center;
-    padding: 20px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-div {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    display: inline-block;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    padding: 20px 10px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 22px;
     margin-bottom: 20px;
 }
 
-input {
-    width: 200px;
+.card {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    width: 100%;
     padding: 10px;
-    margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
 }
 
 button {
-    background-color: #28a745;
-    color: white;
+    padding: 10px;
+    border-radius: 8px;
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    font-weight: 600;
+    font-size: 14px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    width: 100%;
 }
 
-button:hover {
-    background-color: #218838;
+.submit-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.submit-btn:hover {
+    opacity: 0.9;
+}
+
+button:not(.submit-btn):not(.delete-btn) {
+    background: #4CAF50;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.delete-btn {
+    background: #ff4d4d;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #cc0000;
+}
+
+.form-actions {
+    margin-top: 10px;
 }
 
 .search-container {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 10px;
-    margin-bottom: 20px;
+}
+
+.table-card {
+    padding: 0;
+    overflow-x: auto;
 }
 
 table {
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
+    min-width: 500px;
     border-collapse: collapse;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
 }
 
 th {
-    background-color:  black;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
+    padding: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+td {
+    padding: 10px;
+    text-align: center;
+    font-size: 13px;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 tr:hover {
-    background-color: #ddd;
+    background-color: #f8f9ff;
 }
 
-select {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
+@media (min-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    button {
+        width: auto;
+    }
+
+    .search-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .search-container input {
+        flex: 1;
+    }
 }
 
-#right-button{
-    display: flex;
-    justify-content: end;
+@media (min-width: 768px) {
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    th, td {
+        font-size: 14px;
+    }
 }
 
-.lal{
-    background-color: red;
-}
+@media (max-width: 475px) {
 
-.submit-btn{
-    background-color: blue;
+    td:last-child {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    td:last-child button {
+        width: 100%;
+    }
+
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    th, td {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
 }
