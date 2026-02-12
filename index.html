@@ -12,9 +12,9 @@
         <input type="text" id="name" placeholder="Name">
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="pwd" placeholder="Password"><br>
-        <right id="right-button">
-            <button  class="submit-btn" onclick="addUser()">Submit</button>
-        </right>
+        <div id="right-button">
+            <button class="submit-btn" onclick="addUser()">Submit</button>
+        </div>
     </div>
 
     <div class="search-container">
@@ -48,12 +48,11 @@
             const password = document.getElementById("pwd").value.trim();
             if (!name || !username || !password) return alert("Fill all fields!");
 
-            if (editIndex !== null) users[editIndex] = { name, username, password };
-            else {
+            if (editIndex !== null) {
+                users[editIndex] = { name, username, password };
+            } else {
                 users.push({ name, username, password });
-                localStorage.setItem("users", JSON.stringify(users));
             }
-
 
             editIndex = null;
             document.querySelectorAll("input").forEach(input => input.value = "");
@@ -101,5 +100,6 @@
         }
     </script>
 </body>
+
 
 </html>
